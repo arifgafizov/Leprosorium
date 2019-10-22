@@ -27,6 +27,9 @@ configure do
 end
 
 get '/' do
+	# выбираем список постов из БД
+	@results = @db.execute 'SELECT * FROM Posts ORDER BY id DESC'
+
 	erb :index			
 end
 
