@@ -11,7 +11,17 @@ def init_db
 end
 
 before do
+	init_db
+end
 
+configure do
+	# добавили init_db т.к. метод before не исполняется при конфигурации
+	init_db
+	@db.execute 'CREATE TABLE IF NOT EXISTS Posts (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_date DATE,
+    content      TEXT
+	)'
 end
 
 get '/' do
