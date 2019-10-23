@@ -71,6 +71,9 @@ get '/details/:post_id' do
 	results = @db.execute 'SELECT * FROM Posts WHERE id = ?', [post_id]
 	# присваеваем глобальной переменной row этот запрошенный пост
 	@row = results[0]
+
+	# выбираем комментарий для нашего поста
+	@comments = @db.execute 'SELECT * FROM Comments WHERE id = ? ORDER BY id', [post_id]
 	# возвращаем представление details.erb
 	erb :details
 end
