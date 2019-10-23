@@ -57,5 +57,11 @@ end
 # вывод информации о  посте
 get '/details/:post_id' do
 	post_id = params[:post_id]
-	erb "Displaying information for post with #{post_id}"
+
+	# Запрос из БД поста по его id
+	results = @db.execute 'SELECT * FROM Posts WHERE id = ?', [post_id]
+	# первую строку запроса присваеваем глобальной переменной row
+	@row = results[0]
+
+	erb :details
 end
