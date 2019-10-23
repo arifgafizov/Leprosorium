@@ -56,12 +56,13 @@ end
 
 # вывод информации о  посте
 get '/details/:post_id' do
+	# Получаем переменную из url'а
 	post_id = params[:post_id]
 
-	# Запрос из БД поста по его id
+	# Запрос из БД одного поста по его id
 	results = @db.execute 'SELECT * FROM Posts WHERE id = ?', [post_id]
-	# первую строку запроса присваеваем глобальной переменной row
+	# присваеваем глобальной переменной row этот запрошенный пост
 	@row = results[0]
-
+	# возвращаем представление details.erb
 	erb :details
 end
