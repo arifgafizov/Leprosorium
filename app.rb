@@ -18,11 +18,19 @@ end
 configure do
 	# добавили init_db т.к. метод before не исполняется при конфигурации
 	init_db
-	# создает таблицу если она не существует
+	# создает таблицу Posts если она не существует
 	@db.execute 'CREATE TABLE IF NOT EXISTS Posts (
     id           INTEGER PRIMARY KEY AUTOINCREMENT,
     created_date DATE,
     content      TEXT
+	)'
+
+	# создает таблицу Comments если она не существует
+	@db.execute 'CREATE TABLE IF NOT EXISTS Comments (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_date DATE,
+    content      TEXT,
+    post_id	     INTEGER
 	)'
 end
 
