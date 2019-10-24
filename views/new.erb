@@ -3,6 +3,11 @@
 	<form action='/new' method='POST'>
 		<textarea name="content" class="form-control" rows="6" placeholder="Type post text here" style="width: 800px"></textarea>
 		<br/>
+		<div class="form-group">
+    		<label>Your name</label>
+    		<input name="username" type="text" class="form-control" placeholder="Type your name" style="width: 800px" value="<%= @username %>">
+		</div>
+		<br/>
 	 	<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 </p>
