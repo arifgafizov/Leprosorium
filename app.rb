@@ -39,6 +39,13 @@ configure do
 		content TEXT,
 		post_id integer
 	)'
+
+	# создает таблицу если таблица не существует
+	@db.execute 'create table if not exists Usernames
+	(
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		name TEXT
+	)'
 end
 
 get '/' do
