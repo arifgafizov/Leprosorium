@@ -1,3 +1,5 @@
+<html>
+<body>
 <h2>Latest posts:</h2>
 <br/>
 
@@ -9,7 +11,11 @@
 		Added at <%= post['created_date'] %>
 		<br/>
 		<br/>
+		<%= post['username'] %>
+		<br/>
+		<br/>
 		<a href="/details/<%= post['id'] %>">Comments</a>
 	</p>
-	<hr/>
 <% end %>
+</body>
+</html>

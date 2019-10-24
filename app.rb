@@ -5,6 +5,7 @@ require 'sqlite3'
 
 def init_db
 	@db = SQLite3::Database.new 'leprosorium.db'
+	# возвращает результат как хеш а не массив
 	@db.results_as_hash = true 
 end
 
@@ -28,7 +29,8 @@ configure do
 	(
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		created_date DATE,
-		content TEXT
+		content TEXT,
+		username TEXT
 	)'
 
 	# создает таблицу если таблица не существует
@@ -38,13 +40,6 @@ configure do
 		created_date DATE,
 		content TEXT,
 		post_id integer
-	)'
-
-	# создает таблицу если таблица не существует
-	@db.execute 'create table if not exists Usernames
-	(
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		name TEXT
 	)'
 end
 
@@ -78,9 +73,8 @@ post '/new' do
 
 	# сохранение данных в БД
 
-	@db.execute 'insert into Posts (content, created_date) values (?, datetime())', [content]
-	@db.execute 'insert into Usernames (name) values (?)', [username]
-
+	@db.execute 'insert into Posts (content, created_date, username) values (?, datetime(), ?)', [content, username]
+	
 	# перенаправление на главную страницу
 
 	redirect to '/'
