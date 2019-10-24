@@ -79,6 +79,7 @@ post '/new' do
 	# сохранение данных в БД
 
 	@db.execute 'insert into Posts (content, created_date) values (?, datetime())', [content]
+	@db.execute 'insert into Usernames (name) values (?)', [username]
 
 	# перенаправление на главную страницу
 
